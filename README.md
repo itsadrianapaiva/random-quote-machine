@@ -1,5 +1,4 @@
 # Random Quote Machine App
-==========================
 
 A delightful web application built with Vite, React, and TypeScript, serving up inspiring quotes at random.
 
