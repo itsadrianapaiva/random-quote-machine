@@ -1,8 +1,7 @@
 import { useState } from "react";
 import "./App.css";
-// import { fetchQuotes } from "./assets/fetchData";
-// import apiKey from "./assets/fetchData";
 import quotes from "./assets/quotes.json";
+import { FaTwitter, FaQuoteLeft, FaQuoteRight } from "react-icons/fa";
 
 type Quote = {
   quote: string;
@@ -13,26 +12,42 @@ const getRandomQuote = (): Quote => {
     return quotes[Math.floor(Math.random() * quotes.length)];
   };
 
+
 function App() {
   const [quote, setQuote] = useState<Quote>(getRandomQuote());
-//   const [error, setError] = useState<string | null>(null);
 
-//   useEffect(() => {
-//     const loadQuotes = async () => {
-//       try {
-//         const fetchedQuotes = await fetchQuotes();
-//         setQuote(fetchQuotes);
-//       } catch (error) {
-//         setError("Failed to load quotes");  
-//       }
-//     };
+  const changeQuote = () => {
+    setQuote(getRandomQuote());
+  }
 
-//     loadQuotes();
-//   }, []);
-
-  return <>hello</>;
+  return (
+    <div className="background">
+    <div id="quote-box">
+        <div className="quote-content">
+            <FaQuoteLeft size="30" style={{ marginRight: "10px" }} />
+            <h2 id="text">{quote.quote}</h2>
+            <FaQuoteRight size="30" style={{ marginLeft: "10px" }} />
+            <h4 id="author">- {quote.author}</h4>
+        </div>
+        <div className="buttons">
+            <a 
+            href={`https://twitter.com/intent/tweet?hashtags=quotes&related=freecodecamp&text=${quote.quote}`}
+            id="tweet-quote"
+            style={{
+                backgroundColor: "#1DA1F2",
+                marginRight: "10px",
+            }}
+            >
+                <FaTwitter color="white"/>
+            </a>
+            <button id="new-quote" onClick={changeQuote}>
+                Change Quote
+            </button>
+        </div>
+    </div>
+  </div>
+  );
 };
-
 
 
 export default App;
